@@ -7,7 +7,9 @@ const router = Router();
 
 router.post('/mint', async (req, res) => {
   const { name, image, description, attributes, email } = req.body
-
+  console.log(X_CLIENT_SECRET)
+  console.log(X_PROJECT_ID)
+  console.log(PORT)
   const url = `https://staging.crossmint.com/api/2022-06-09/collections/default-polygon/nfts/${name}`;
   const options = {
     method: 'PUT',
@@ -81,6 +83,7 @@ router.get('/mint', async (req, res) => {
 router.get("/", (req, res) => {
   res.json({ msg: "Hola" })
   console.log(X_CLIENT_SECRET)
+  console.log(X_PROJECT_ID)
   console.log(PORT)
 })
 
