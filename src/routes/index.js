@@ -1,5 +1,5 @@
 const { Router } = require('express');
-require('dotenv').config();
+// require('dotenv').config();
 const { X_CLIENT_SECRET, X_PROJECT_ID, RECIPIENT } = require("../../config")
 const fetch = require('node-fetch');
 
