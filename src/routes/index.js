@@ -1,6 +1,6 @@
 const { Router } = require('express');
 // require('dotenv').config();
-// const { X_CLIENT_SECRET, X_PROJECT_ID, RECIPIENT } = require("../../config")
+const { X_CLIENT_SECRET, X_PROJECT_ID, RECIPIENT, PORT } = require("../../config")
 const fetch = require('node-fetch');
 
 const router = Router();
@@ -13,8 +13,8 @@ router.post('/mint', async (req, res) => {
     method: 'PUT',
     headers: {
       'content-type': 'application/json',
-      'x-client-secret': 'sk_test.ANHbYLHo.AO3zGahQ0AYjaWwMlhlXmX8txZDdSXq5',
-      'x-project-id': 'b9255591-b2ee-4cc5-93f5-987ae1ad6ee2'
+      'x-client-secret': X_CLIENT_SECRET,
+      'x-project-id': X_PROJECT_ID
     },
     body: JSON.stringify({
       recipient: `email:${email}:polygon`,
@@ -48,8 +48,8 @@ router.get('/mint', async (req, res) => {
   const options = {
     method: 'GET',
     headers: {
-      'x-client-secret': 'sk_test.ANHbYLHo.AO3zGahQ0AYjaWwMlhlXmX8txZDdSXq5',
-      'x-project-id': 'b9255591-b2ee-4cc5-93f5-987ae1ad6ee2'
+      'x-client-secret': X_CLIENT_SECRET,
+      'x-project-id': X_PROJECT_ID
     }
   };
 
@@ -80,6 +80,8 @@ router.get('/mint', async (req, res) => {
 
 router.get("/", (req, res) => {
   res.json({ msg: "Hola" })
+  console.log(X_CLIENT_SECRET)
+  console.log(PORT)
 })
 
 module.exports = router;
