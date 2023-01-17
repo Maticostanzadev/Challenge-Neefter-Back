@@ -7,9 +7,7 @@ const router = Router();
 
 router.post('/mint', async (req, res) => {
   const { name, image, description, attributes, email } = req.body
-  console.log(X_CLIENT_SECRET)
-  console.log(X_PROJECT_ID)
-  console.log(PORT)
+
   const url = `https://staging.crossmint.com/api/2022-06-09/collections/default-polygon/nfts/${name}`;
   const options = {
     method: 'PUT',
@@ -39,7 +37,6 @@ router.post('/mint', async (req, res) => {
   mint_result.msgError ? statusCode = 400 : statusCode = 200
 
   res.status(statusCode).json(mint_result)
-
 })
 
 router.get('/mint', async (req, res) => {
@@ -62,11 +59,7 @@ router.get('/mint', async (req, res) => {
     .catch(error => check_result = { msgError: error });
 
   while (!check_result.msgError && check_result.onChain.status === "pending") {
-    // if (mint_status.error) {
-    //   await interaction.followUp({ content: `Error minting the NFT.`, ephemeral: true });
-    //   return false;
-    // }
-    await new Promise(r => setTimeout(r, 5000)); // 5 seconds
+    await new Promise(r => setTimeout(r, 5000));
     await fetch(url, options)
       .then(response => response.json())
       .then(result => check_result = result)
@@ -78,13 +71,6 @@ router.get('/mint', async (req, res) => {
 
   res.status(statusCode).json(check_result)
 
-})
-
-router.get("/", (req, res) => {
-  res.json({ msg: "Hola" })
-  console.log(X_CLIENT_SECRET)
-  console.log(X_PROJECT_ID)
-  console.log(PORT)
 })
 
 module.exports = router;
